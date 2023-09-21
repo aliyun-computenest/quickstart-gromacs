@@ -59,7 +59,7 @@ AlphaFold2社区版在计算巢部署的费用主要涉及：
 |           | 交换机ID    | 资源所在交换机                                      |
 
 ## 部署流程
-1. 访问计算巢AlphaFold2社区版[部署链接](https://computenest.console.aliyun.com/user/cn-hangzhou/serviceInstanceCreate?ServiceId=service-a44c0fa4bf4947278642)
+1. 访问计算巢Gromacs社区版[部署链接](https://computenest.console.aliyun.com/user/cn-hangzhou/serviceInstanceCreate?ServiceId=service-a44c0fa4bf4947278642)
 ，按提示填写部署参数：
     ![image.png](2.jpg)
 
@@ -83,12 +83,15 @@ AlphaFold2社区版在计算巢部署的费用主要涉及：
 ### **步骤二：提交作业**
 
 1.  执行以下命令下载并解压算例。本文使用水分子运动算例作为示例。
-    ```
+
     wget https://public-ehpc-package.oss-cn-hangzhou.aliyuncs.com/water_GMX50_bare.tar.gz
+    
     tar xzvf water_GMX50_bare.tar.gz
+    
     chown -R gromacs water-cut1.0_GMX50_bare
+    
     chgrp -R users water-cut1.0_GMX50_bare
-    ```
+    
 2.  执行以下命令创建作业脚本文件，脚本文件命名为gmx.pbs。
 
     ```
@@ -132,7 +135,6 @@ AlphaFold2社区版在计算巢部署的费用主要涉及：
      \#-ntomp指定每个进程开启的OpenMP线程数，-nsteps指定模拟迭代步数
     
       mpirun -np 4 /opt/gromacs-gpu/2018.1/bin/gmx_mpi mdrun -ntomp 1 -nsteps 100000 -pin on -s topol_pme.tpr
- </code>
 
 3.  执行以下命令提交作业。
 
